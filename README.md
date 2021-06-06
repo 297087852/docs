@@ -1,8 +1,10 @@
+# 相关校验工具
+
 ## ESlint
 
 `ESLint`是一个语法规则和代码风格的检查工具,可以用来保证写出语法正确、风格统一的代码。
 
-官网: https://eslint.org/
+官网: <https://eslint.org/>
 
 ```sh
   npm install eslint -D
@@ -87,9 +89,9 @@ eslint 常用命令(查看[全部](https://eslint.org/docs/user-guide/command-li
 }
 ```
 
-- [root](https://eslint.org/docs/user-guide/configuring/configuration-files#cascading-and-hierarchy) 根目录标识, 标识当前配置文件为最底层的文件，无需往更上一级的文件目录中进行搜索
+- [root](https://eslint.org/docs/user-guide/configuring/configuration-files#cascading-and-hierarchy) 根目录标识, 标识当前配置文件为最底层的文件, 无需往更上一级的文件目录中进行搜索
 
-- [env](https://eslint.org/docs/user-guide/configuring/language-options#specifying-environments) 用于指定环境，每个环境都有自己预定义的全局变量，可以同时指定多个环境，不矛盾。如 console 属性只有在 browser 环境下才会存在，如果不设置支持 browser，那么可能会 console is undefined
+- [env](https://eslint.org/docs/user-guide/configuring/language-options#specifying-environments) 用于指定环境, 每个环境都有自己预定义的全局变量, 可以同时指定多个环境, 不矛盾。如 console 属性只有在 browser 环境下才会存在, 如果不设置支持 browser, 那么可能会 console is undefined
 
   ```js
     env: {
@@ -101,7 +103,7 @@ eslint 常用命令(查看[全部](https://eslint.org/docs/user-guide/command-li
     },
   ```
 
-- [extends](https://eslint.org/docs/user-guide/configuring/configuration-files#extending-configuration-files) 可以是一个字符串或字符串数组，数组中每个配置项继承它前面的配置，可以对继承的规则进行修改、覆盖和拓展
+- [extends](https://eslint.org/docs/user-guide/configuring/configuration-files#extending-configuration-files) 可以是一个字符串或字符串数组, 数组中每个配置项继承它前面的配置, 可以对继承的规则进行修改、覆盖和拓展
 
   ```js
     "extends": [
@@ -121,16 +123,16 @@ eslint 常用命令(查看[全部](https://eslint.org/docs/user-guide/command-li
 
   - `Esprima`
 
-  - `@babel/eslint-parse` 对 Babel 解析器的包装，使其能够与 ESLint 兼容(`babel-eslint`不再更新维护)
+  - `@babel/eslint-parse` 对 Babel 解析器的包装, 使其能够与 ESLint 兼容(`babel-eslint`不再更新维护)
 
-  - `typescript-eslint-parser` 把 TypeScript 转换为 ESTree 兼容格式的解析器，这样它就可以在 ESLint 中使用了。这样做的目的是通过 ESLint 来解析 TypeScript 文件（尽管不一定必须通过所有的 ESLint 规则）
+  - `typescript-eslint-parser` 把 TypeScript 转换为 ESTree 兼容格式的解析器, 这样它就可以在 ESLint 中使用了。这样做的目的是通过 ESLint 来解析 TypeScript 文件（尽管不一定必须通过所有的 ESLint 规则）
 
 - [parserOptions](https://eslint.org/docs/user-guide/configuring/language-options#specifying-parser-options) 指定解析器要想使用的环境配置参数
 
   ```js
     parserOptions: {
       ecmaVersion: 2021,  // 默认是5
-      sourceType: 'module',  // 默认'script'，但一般使用ECMAScript模块形式''module
+      sourceType: 'module',  // 默认'script', 但一般使用ECMAScript模块形式''module
       ecmafeatures: {
         globalReturn: false,  //允许在全局作用域下使用return语句
         impliedStrict: false,  //启用全局strict模式（严格模式）
@@ -148,36 +150,36 @@ eslint 常用命令(查看[全部](https://eslint.org/docs/user-guide/command-li
 
   “off” 或 0: 关闭规则
 
-  “warn” 或 1: 开启规则，使用警告级别的错误：warn (不会导致程序退出)
+  “warn” 或 1: 开启规则, 使用警告级别的错误: warn (不会导致程序退出)
 
-  “error” 或 2: 开启规则，使用错误级别的错误：error (当被触发的时候，程序会退出)
+  “error” 或 2: 开启规则, 使用错误级别的错误: error (当被触发的时候, 程序会退出)
 
-  #### ESLint 的规则不仅只有关闭和开启这么简单，每一条规则还有自己的配置项。如果需要对某个规则进行配置，就需要使用数组形式的参数
+### ESLint 的规则不仅只有关闭和开启这么简单, 每一条规则还有自己的配置项。如果需要对某个规则进行配置, 就需要使用数组形式的参数
 
-  ```js
-  {
-      "rules": {
-        // 使用数组形式，对规则进行配置
-        // 第一个参数为是否启用规则
-        // 后面的参数才是规则的配置项
-        "quotes": [
-          "error",
-          "single",
-          {
-            "avoidEscape": true // 允许字符串中使用单引号或者双引号
-          }
-        ]
-      }
+```js
+{
+    "rules": {
+      // 使用数组形式, 对规则进行配置
+      // 第一个参数为是否启用规则
+      // 后面的参数才是规则的配置项
+      "quotes": [
+        "error",
+        "single",
+        {
+          "avoidEscape": true // 允许字符串中使用单引号或者双引号
+        }
+      ]
     }
-  ```
+  }
+```
 
-- [settings](https://eslint.org/docs/user-guide/configuring/configuration-files#adding-shared-settings) 提供给具体规则项，每个参数值，每个规则项都会被注入该变量
+- [settings](https://eslint.org/docs/user-guide/configuring/configuration-files#adding-shared-settings) 提供给具体规则项, 每个参数值, 每个规则项都会被注入该变量
 
 - [noInlineConfig](https://eslint.org/docs/user-guide/configuring/rules#disabling-inline-comments) 是否允许行内注释
 
 - [overrides](https://eslint.org/docs/user-guide/configuring/configuration-files#configuration-based-on-glob-patterns) 对特定文件进行特定的 eslint 检测
 
-#### [Ignoring Code](https://eslint.org/docs/user-guide/configuring/ignoring-code)忽略掉不被 lint 的文件
+### [Ignoring Code](https://eslint.org/docs/user-guide/configuring/ignoring-code)忽略掉不被 lint 的文件
 
 ```js
   // .eslintrc
@@ -196,7 +198,7 @@ eslint 常用命令(查看[全部](https://eslint.org/docs/user-guide/command-li
   /dist/
 ```
 
-#### 社区流行的三种风格指南
+### 社区流行的三种风格指南
 
 - [Airbnb](https://github.com/airbnb/javascript)(324)
 
@@ -235,9 +237,24 @@ eslint 常用命令(查看[全部](https://eslint.org/docs/user-guide/command-li
   }
 ```
 
+### 常见 eslint 插件及作用
+
+- **eslint-webpack-plugin**: `eslint`解析器, 因为`webpack`是识别 js, 要解析`eslint`必须的`loader`, 这是`webpack`的基本步骤, 相对于老版的`eslint-loader`后续不再更新
+- **eslint-plugin-react**: 专门针对`react`语法的`eslint`规则, `react`项目必须
+- **eslint-plugin-import**: 针对`import`语法优化的插件, 防止`webpack`自定义路径造成的错误
+- **eslint-plugin-prettier**: 运行`prettier`代码格式化插件的配置
+- **eslint-config-prettier**: `eslint`关闭所有不必要或可能与`Prettier`冲突的规则
+- **eslint-plugin-promise**: es 语法`promise`的`eslint`最佳配置
+- **eslint-plugin-react-hooks**: 专门针对`react`的`hook`语法的`eslint`规则
+- **eslint-plugin-vue**: `vue`项目的的配置, `vue`项目必须
+- **@typescript-eslint/eslint-plugin**: `ts`语法的配置
+- **eslint-plugin-node**: 为`node`准备的`eslint`规则配置
+- **eslint-plugin-babel**: 当使用`babel-eslint`, 这个插件能很好调和`babel`与`eslint`的结合, 定义在`.eslintrc.*`的`plugin`属性中
+- **@babel/eslint-plugin**: 当使用`@babel/eslint-parser`, 这个插件能很好调和`babel`与`eslint`的结合
+
 ## prettier
 
-官网: https://prettier.io
+官网: <https://prettier.io>
 
 安装:
 
@@ -266,7 +283,7 @@ module.exports = {
 }
 ```
 
-#### 禁用文件或者代码块
+### 禁用文件或者代码块
 
 ```js
   // prettier-ignore
@@ -279,7 +296,7 @@ module.exports = {
   dist
 ```
 
-#### 与 eslint 搭配使用
+### 与 eslint 搭配使用
 
 [eslint-config-prettier](https://github.com/prettier/eslint-config-prettier)
 
@@ -287,7 +304,7 @@ module.exports = {
 
 ## husky
 
-官网: https://typicode.github.io/husky/#/
+官网: <https://typicode.github.io/husky/>
 
 ```sh
   npx husky-init && npm install
@@ -296,25 +313,25 @@ module.exports = {
 - 安装`husky`为开发依赖
 - 在项目根目录创建`.husky`
 - 在.husky 创建`pre-commit` hook && 初始化 `pre-commit` 命令为 `npm test`
-- 在`package.json`的`scripts`中，增加脚本`"prepare": "husky install"`
-- 在`.git`的`config`中，增加 `hooksPath = .husky`(git 版本需要>=2.9)
+- 在`package.json`的`scripts`中, 增加脚本`"prepare": "husky install"`
+- 在`.git`的`config`中, 增加 `hooksPath = .husky`(git 版本需要>=2.9)
 
 `prepare` 为 npm 自带`Life Cycle Scripts`, 可以在 npm install(不带参数)之后自动执行(见 [npm 文档](https://docs.npmjs.com/cli/v7/using-npm/scripts#life-cycle-scripts))
 
 `git hooksPath`设置`hooks`脚本目录的路径
 
-当我们在`.husky`配置好相关`hooks`后提交到代码库，其他成员拉取项目并执行`npm install`时，触发`prepare`执行`husky install`后，更改`.git`文件夹`config`中 `hooksPath = .husky`
+当我们在`.husky`配置好相关`hooks`后提交到代码库, 其他成员拉取项目并执行`npm install`时, 触发`prepare`执行`husky install`后, 更改`.git`文件夹`config`中 `hooksPath = .husky`
 保持项目设置同步
 
-#### 新增 git hooks
+### 新增 git hooks
 
 ```sh
   npx husky add .husky/commit-msg "npm run commitlint"
 ```
 
-#### 跳过校验
+### 跳过校验
 
-```
+```sh
   git add . && git commit --no-verify -m "代码规范强制提交测试"
 ```
 
@@ -322,7 +339,7 @@ module.exports = {
 
 `lint-staged` 是一个在`git`暂存文件上运行 linters 的工具
 
-官网: http://github.com/okonet/lint-staged
+官网: <http://github.com/okonet/lint-staged>
 
 ```sh
   npx mrm lint-staged
@@ -332,7 +349,7 @@ module.exports = {
 
 - 安装`lint-staged` `husky`为开发依赖
 - 在`.husky`创建`pre-commit` hook && 初始化 `pre-commit` 命令为 `npx lint-staged`
-- 检测 package.json 中的依赖项，如开发依赖中包含`eslint`、`prettier && !eslint-plugin-prettier`、`stylelint`, 将会自动配置在`package.json` 的`lint-staged`中
+- 检测 package.json 中的依赖项, 如开发依赖中包含`eslint`、`prettier && !eslint-plugin-prettier`、`stylelint`, 将会自动配置在`package.json` 的`lint-staged`中
 
 ```json
 // package.json
@@ -346,20 +363,20 @@ module.exports = {
 
 ## stylelint
 
-官网: https://stylelint.io/
+官网: <https://stylelint.io/>
 
 ```sh
   npm install stylelint stylelint-config-standard -D
 ```
 
-#### 常用插件
+### 常用插件
 
 - [stylelint-scss](https://github.com/kristerkari/stylelint-scss)
 - [stylelint-order](https://github.com/hudochenkov/stylelint-order)
 - [stylelint-config-standard](https://github.com/stylelint/stylelint-config-standard)
 - [stylelint-config-recess-order](https://github.com/stylelint/stylelint-config-standard)
 
-#### stylelint.config.js 配置
+### stylelint.config.js 配置
 
 ```js
   processors: ["stylelint-my-processor"],
@@ -378,7 +395,7 @@ module.exports = {
   ignoreFiles:  ["test/*.css"]
 ```
 
-#### 禁用文件或者代码块
+### 禁用文件或者代码块
 
 ```js
 /* stylelint-disable */
@@ -394,11 +411,11 @@ module.exports = {
 
 ## 提交规范
 
-目前，社区有多种 Commit message 的[写法规范](https://github.com/conventional-changelog/conventional-changelog/tree/master/packages)，[Angular 规范](https://github.com/angular/angular/blob/master/CONTRIBUTING.md#type)目前是使用最广的写法，比较合理和系统化，并且有配套的工具:
+目前, 社区有多种 Commit message 的[写法规范](https://github.com/conventional-changelog/conventional-changelog/tree/master/packages), [Angular 规范](https://github.com/angular/angular/blob/master/CONTRIBUTING.md#type)目前是使用最广的写法, 比较合理和系统化, 并且有配套的工具:
 
-Commit message 都包括三个部分：Header, Body 和 Footer
+Commit message 都包括三个部分: Header, Body 和 Footer
 
-```
+```console
   <Header>
   <BLANK LINE>
   <Body>
@@ -408,11 +425,11 @@ Commit message 都包括三个部分：Header, Body 和 Footer
 
 其中, Header 是必需的, Body 和 Footer 可以省略。
 
-不管是哪一个部分，任何一行都不得超过 72 个字符（或 100 个字符）。这是为了避免自动换行影响美观
+不管是哪一个部分, 任何一行都不得超过 72 个字符（或 100 个字符）。这是为了避免自动换行影响美观
 
-### Header 部分只有一行，包括三个字段：type（必需）、scope（可选）和 subject（必需）
+### Header 部分只有一行, 包括三个字段: type（必需）、scope（可选）和 subject（必需）
 
-```
+```console
   <type>(<scope>): <short summary>
   │       │             │
   │       │             └─⫸ Summary in present tense. Not capitalized. No period at the end.
@@ -431,27 +448,27 @@ Commit message 都包括三个部分：Header, Body 和 Footer
 
 #### Type
 
-  - build: 影响构建系统或外部依赖项的更改(gulp, broccoli, npm)
-  - ci: 对CI配置文件和脚本的更改(Circle, BrowserStack, SauceLabs)
-  - docs: 文档变更
-  - feat: 新功能（feature）
-  - fix: 修补 bug
-  - perf: 优化, 提高性能相关
-  - refactor: 重构（即不是新增功能，也不是修改 bug 的代码变动）
-  - test: 增加测试
-  - revert: 代码版本回退
+- build: 影响构建系统或外部依赖项的更改(gulp, broccoli, npm)
+- ci: 对 CI 配置文件和脚本的更改(Circle, BrowserStack, SauceLabs)
+- docs: 文档变更
+- feat: 新功能（feature）
+- fix: 修补 bug
+- perf: 优化, 提高性能相关
+- refactor: 重构（即不是新增功能, 也不是修改 bug 的代码变动）
+- test: 增加测试
+- revert: 代码版本回退
 
 #### Scope
 
-  用于说明 commit 影响的范围，比如数据层、控制层、视图层等等，视项目不同而不同
+用于说明 commit 影响的范围, 比如数据层、控制层、视图层等等, 视项目不同而不同
 
 #### Summary
 
-  - 以动词开头，使用第一人称现在时，比如change，而不是changed或changes
-  - 第一个字母小写
-  - 结尾不加句号（.）
+- 以动词开头, 使用第一人称现在时, 比如 change, 而不是 changed 或 changes
+- 第一个字母小写
+- 结尾不加句号（.）
 
-### Body 部分是对本次 commit 的详细描述，可以分成多行
+### Body 部分是对本次 commit 的详细描述, 可以分成多行
 
 ```console
   More detailed explanatory text, if necessary.  Wrap it to about 72 characters or so.
@@ -462,11 +479,11 @@ Commit message 都包括三个部分：Header, Body 和 Footer
   - Use a hanging indent
 ```
 
-### Footer 部分只用于两种情况。
+### Footer 部分只用于两种情况
 
 - 不兼容变动
 
-  如果当前代码与上一个版本不兼容，则 Footer 部分以 BREAKING CHANGE 开头，后面是对变动的描述、以及变动理由和迁移方法。
+  如果当前代码与上一个版本不兼容, 则 Footer 部分以 BREAKING CHANGE 开头, 后面是对变动的描述、以及变动理由和迁移方法。
 
   ```console
     BREAKING CHANGE: isolate scope bindings definition has changed.
@@ -493,24 +510,26 @@ Commit message 都包括三个部分：Header, Body 和 Footer
   ```console
     Closes #666, #667
   ```
-#### Revert
 
-还有一种特殊情况，如果当前 commit 用于撤销以前的 commit，则必须以revert:开头，后面跟着被撤销 Commit 的 Header
+### Revert
 
-```
+还有一种特殊情况, 如果当前 commit 用于撤销以前的 commit, 则必须以 revert:开头, 后面跟着被撤销 Commit 的 Header
+
+```console
   revert: feat(pencil): add 'graphiteWidth' option
 
   This reverts commit 667ecc1654a317a13331b17617d973392f415f02.
 ```
+
 ## commitlint
 
-官网: https://commitlint.js.org/#/
+官网: <https://commitlint.js.org/>
 
 ```sh
   npm install  @commitlint/cli @commitlint/config-conventional -D
 ```
 
-#### commitlint.config.js 文件配置
+### commitlint.config.js 文件配置
 
 ```js
 module.exports = {
@@ -553,9 +572,9 @@ module.exports = {
 
 ## editorconfig
 
-`EditorConfig`帮助开发人员在不同的编辑器和 IDE 之间定义和维护一致的编码样式。EditorConfig 项目由用于定义编码样式的文件格式和一组文本编辑器插件组成，这些插件使编辑器能够读取文件格式并遵循定义的样式。EditorConfig 文件易于阅读，并且与版本控制系统配合使用
+`EditorConfig`帮助开发人员在不同的编辑器和 IDE 之间定义和维护一致的编码样式。EditorConfig 项目由用于定义编码样式的文件格式和一组文本编辑器插件组成, 这些插件使编辑器能够读取文件格式并遵循定义的样式。EditorConfig 文件易于阅读, 并且与版本控制系统配合使用
 
-官网: https://editorconfig.org/
+官网: <https://editorconfig.org/>
 
 ```makefile
   # .editorconfig
@@ -582,7 +601,7 @@ module.exports = {
 
 目录中存在 `jsconfig.json` 文件表示该目录是 `JavaScript` 项目的根目录。`jsconfig.json` 文件指定根文件和 `JavaScript` 语言服务提供的功能选项。
 
-`jsconfig.json`源于`tsconfig.json`，是`TypeScript`的配置文件。`jsconfig.json`相当于`tsconfig.json`的`allowJs`属性设置为`true`。
+`jsconfig.json`源于`tsconfig.json`, 是`TypeScript`的配置文件。`jsconfig.json`相当于`tsconfig.json`的`allowJs`属性设置为`true`。
 
 ```json
 // jsconfig.json
