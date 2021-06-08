@@ -13,7 +13,7 @@
 eslint 常用命令(查看[全部](https://eslint.org/docs/user-guide/command-line-interface#options))
 
 ```sh
-  eslint [options] [file|dir|glob]*
+  npx eslint [options] [file|dir|glob ...]*
 ```
 
 - `--init`: Run config initialization wizard
@@ -91,7 +91,7 @@ eslint 常用命令(查看[全部](https://eslint.org/docs/user-guide/command-li
 
 - [root](https://eslint.org/docs/user-guide/configuring/configuration-files#cascading-and-hierarchy) 根目录标识, 标识当前配置文件为最底层的文件, 无需往更上一级的文件目录中进行搜索
 
-- [env](https://eslint.org/docs/user-guide/configuring/language-options#specifying-environments) 用于指定环境, 每个环境都有自己预定义的全局变量, 可以同时指定多个环境, 不矛盾。如 console 属性只有在 browser 环境下才会存在, 如果不设置支持 browser, 那么可能会 console is undefined
+- [env](https://eslint.org/docs/user-guide/configuring/language-options#specifying-environments) 用于指定环境, 每个环境都有自己预定义的全局变量, 可以同时指定多个环境, 不矛盾
 
   ```js
     env: {
@@ -154,24 +154,24 @@ eslint 常用命令(查看[全部](https://eslint.org/docs/user-guide/command-li
 
   “error” 或 2: 开启规则, 使用错误级别的错误: error (当被触发的时候, 程序会退出)
 
-### ESLint 的规则不仅只有关闭和开启这么简单, 每一条规则还有自己的配置项。如果需要对某个规则进行配置, 就需要使用数组形式的参数
+  ESLint 的规则不仅只有关闭和开启这么简单, 每一条规则还有自己的配置项。如果需要对某个规则进行配置, 就需要使用数组形式的参数
 
-```js
-{
-    "rules": {
-      // 使用数组形式, 对规则进行配置
-      // 第一个参数为是否启用规则
-      // 后面的参数才是规则的配置项
-      "quotes": [
-        "error",
-        "single",
-        {
-          "avoidEscape": true // 允许字符串中使用单引号或者双引号
-        }
-      ]
+  ```js
+  {
+      "rules": {
+        // 使用数组形式, 对规则进行配置
+        // 第一个参数为是否启用规则
+        // 后面的参数才是规则的配置项
+        "quotes": [
+          "error",
+          "single",
+          {
+            "avoidEscape": true // 允许字符串中使用单引号或者双引号
+          }
+        ]
+      }
     }
-  }
-```
+  ```
 
 - [settings](https://eslint.org/docs/user-guide/configuring/configuration-files#adding-shared-settings) 提供给具体规则项, 每个参数值, 每个规则项都会被注入该变量
 
@@ -239,14 +239,14 @@ eslint 常用命令(查看[全部](https://eslint.org/docs/user-guide/command-li
 
 ### 常见 eslint 插件及作用
 
-- **eslint-webpack-plugin**: `eslint`解析器, 因为`webpack`是识别 js, 要解析`eslint`必须的`loader`, 这是`webpack`的基本步骤, 相对于老版的`eslint-loader`后续不再更新
+- **eslint-webpack-plugin**: 用于解析`eslint`在`webpack`中,`eslint-loader`后续不再更新
 - **eslint-plugin-react**: 专门针对`react`语法的`eslint`规则, `react`项目必须
+- **eslint-plugin-react-hooks**: 专门针对`react`的`hook`语法的`eslint`规则
+- **eslint-plugin-vue**: `vue`项目的的配置, `vue`项目必须
 - **eslint-plugin-import**: 针对`import`语法优化的插件, 防止`webpack`自定义路径造成的错误
 - **eslint-plugin-prettier**: 运行`prettier`代码格式化插件的配置
 - **eslint-config-prettier**: `eslint`关闭所有不必要或可能与`Prettier`冲突的规则
 - **eslint-plugin-promise**: es 语法`promise`的`eslint`最佳配置
-- **eslint-plugin-react-hooks**: 专门针对`react`的`hook`语法的`eslint`规则
-- **eslint-plugin-vue**: `vue`项目的的配置, `vue`项目必须
 - **@typescript-eslint/eslint-plugin**: `ts`语法的配置
 - **eslint-plugin-node**: 为`node`准备的`eslint`规则配置
 - **eslint-plugin-babel**: 当使用`babel-eslint`, 这个插件能很好调和`babel`与`eslint`的结合, 定义在`.eslintrc.*`的`plugin`属性中
@@ -262,9 +262,34 @@ eslint 常用命令(查看[全部](https://eslint.org/docs/user-guide/command-li
   npm install prettier -D
 ```
 
+prettier 常用命令(查看[全部](hhttps://prettier.io/docs/en/cli.html))
+
+```sh
+  prettier [options] [file|dir|glob ...]*
+```
+
+- `--check`: 检查文件是否符合 prettier 要求
+- `--write`: 格式化文件
+- `--help`: 显示命令帮助
+
 ```sh
   npx prettier --write
 ```
+
+### prerrier 支持的文件类型
+
+- JavaScript(包括实验性语法)
+- JSX
+- Angular
+- Vue
+- Flow
+- TypeScript
+- CSS, Less, and SCSS
+- HTML
+- JSON
+- GraphQL
+- Markdown, including GFM and MDX
+- YAML
 
 [配置文件](https://prettier.io/docs/en/configuration.html)
 
@@ -276,10 +301,27 @@ eslint 常用命令(查看[全部](https://eslint.org/docs/user-guide/command-li
 ```js
 // prettier.config.js
 module.exports = {
-  trailingComma: 'es5',
-  tabWidth: 4,
-  semi: false,
-  singleQuote: true
+  printWidth: 80, // 设置prettier单行输出（不折行）的（最大）长度
+  tabWidth: 2, // 使用 2 个空格缩进
+  useTabs: false, // 不使用缩进符，而使用空格
+  semi: false, // 在语句末尾添加分号
+  singleQuote: true, // 使用单引号而非双引号
+  jsxSingleQuote: false, // jsx 不使用单引号，而使用双引号
+  trailingComma: 'all', // 末尾不需要逗号
+  bracketSpacing: true, // 大括号内的首尾需要空格
+  jsxBracketSameLine: false, // jsx 标签的反尖括号需要换行
+  arrowParens: 'always', // 箭头函数，只有一个参数的时候，也需要括号
+  rangeStart: 0, // 每个文件格式化的范围从0行开始
+  rangeEnd: Infinity, // 每个文件格式化的范围到整个文件的尾部结束
+  parser: 'babylon', // babylon和flow都支持同一套JavaScript特性（包括Flow）.Prettier将自动根据文件的输入路径选择解析器，如非必要，不要修改该项设置。
+  filepath: 'None', // 指定文件的输入路径，这将被用于解析器参照
+  requirePragma: false, // 不需要写文件开头的 @prettier
+  insertPragma: false, // 不需要在文件的顶部插入一个 @format的特殊注释，以表明改文件已经被Prettier格式化过
+  proseWrap: 'preserve', // 使用默认的折行标准
+  htmlWhitespaceSensitivity: 'css', // 根据显示样式决定 html 要不要折行
+  vueIndentScriptAndStyle: false, // 是否要缩进<script>和<style>标记中的代码在Vue文件中
+  endOfLine: 'lf', // 换行符使用 lf
+  embeddedLanguageFormatting: 'off' // 是否格式化文件中嵌入的代码
 }
 ```
 
@@ -369,33 +411,54 @@ module.exports = {
   npm install stylelint stylelint-config-standard -D
 ```
 
-### 常用插件
+### 常用插件及配置
 
 - [stylelint-scss](https://github.com/kristerkari/stylelint-scss)
 - [stylelint-order](https://github.com/hudochenkov/stylelint-order)
 - [stylelint-config-standard](https://github.com/stylelint/stylelint-config-standard)
 - [stylelint-config-recess-order](https://github.com/stylelint/stylelint-config-standard)
 
-### stylelint.config.js 配置
+### stylelint.config.js 配置文件
 
 ```js
-  processors: ["stylelint-my-processor"],
-  plugins: ["stylelint-order"],
-  extends: "stylelint-config-standard",
-  defaultSeverity: "warning",
+module.exports = {
+  processors: ['stylelint-my-processor'],
+  plugins: ['stylelint-order'],
+  extends: 'stylelint-config-standard',
+  defaultSeverity: 'warning',
   rules: {
-    "at-rule-empty-line-before": "always"|"never",
-    "at-rule-name-case": "lower"|"upper",
-    "block-no-empty": true,
-    "at-rule-no-unknown": [ true, {
-      ignoreAtRules: ['extend', 'at-root', 'debug', 'warn', 'error', 'if', 'else', 'for', 'each', 'while', 'mixin', 'include', 'content', 'return', 'function']
-    }],
-    "selector-class-pattern": /^[a-z]+[a-z0-9]*(-[a-z0-9]+)*$/
+    'at-rule-empty-line-before': 'always' | 'never',
+    'at-rule-name-case': 'lower' | 'upper',
+    'block-no-empty': true,
+    'at-rule-no-unknown': [
+      true,
+      {
+        ignoreAtRules: [
+          'extend',
+          'at-root',
+          'debug',
+          'warn',
+          'error',
+          'if',
+          'else',
+          'for',
+          'each',
+          'while',
+          'mixin',
+          'include',
+          'content',
+          'return',
+          'function'
+        ]
+      }
+    ],
+    'selector-class-pattern': /^[a-z]+[a-z0-9]*(-[a-z0-9]+)*$/
   },
-  ignoreFiles:  ["test/*.css"]
+  ignoreFiles: ['test/*.css']
+}
 ```
 
-### 禁用文件或者代码块
+### stylelint 中禁用文件或者代码块
 
 ```js
 /* stylelint-disable */
@@ -456,7 +519,6 @@ Commit message 都包括三个部分: Header, Body 和 Footer
 - perf: 优化, 提高性能相关
 - refactor: 重构（即不是新增功能, 也不是修改 bug 的代码变动）
 - test: 增加测试
-- revert: 代码版本回退
 
 #### Scope
 
@@ -616,3 +678,4 @@ module.exports = {
   "include": ["src/**/*"]
 }
 ```
+![1](https://user-images.githubusercontent.com/48091667/121136909-c0b25a00-c868-11eb-9737-2b9c1a38b518.jpg)
