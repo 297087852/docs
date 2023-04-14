@@ -368,7 +368,7 @@ module.exports = {
 ### 新增 git hooks
 
 ```sh
-  npx husky add .husky/commit-msg "npm run commitlint"
+  npx husky add .husky/commit-msg "npx commitlint --edit $1"
 ```
 
 ### 跳过校验
@@ -397,7 +397,7 @@ module.exports = {
 // package.json
 {
   "lint-staged": {
-    "*.js": "eslint --fix",
+    "*.{js,jsx,ts,tsx}": "eslint --fix",
     "*.css": "stylelint --fix"
   }
 }
